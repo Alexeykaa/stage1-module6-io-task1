@@ -22,7 +22,7 @@ public class FileReader {
                 line = in.readLine();
             }
             return parser.getProfile();
-        } catch (IOException e) { //NOSONAR
+        } catch (IOException e) {
             logger.error("Cannot read profile data", e);
             throw new ProfileDataException("Cannot read profile data", e);
         }
