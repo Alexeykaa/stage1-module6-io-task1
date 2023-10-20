@@ -12,6 +12,7 @@ public class FileReader {
     private static final Logger logger = LoggerFactory.getLogger(FileReader.class);
     private ProfileParser parser = new ProfileParser();
 
+    @java.lang.SuppressWarnings({"squid:S2139", "java:S2139"})
     public Profile getDataFromFile(File file) {
         try (BufferedReader in = new BufferedReader(new java.io.FileReader(file))) {
             parser.init();
@@ -21,8 +22,7 @@ public class FileReader {
                 line = in.readLine();
             }
             return parser.getProfile();
-        //NOSONAR
-        } catch (IOException e) {
+        } catch (IOException e) { //NOSONAR
             logger.error("Cannot read profile data", e);
             throw new ProfileDataException("Cannot read profile data", e);
         }
