@@ -2,7 +2,6 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -22,9 +21,7 @@ public class FileReader {
                 line = in.readLine();
             }
             return parser.getProfile();
-        } catch (FileNotFoundException e) {
-            logger.error("Cannot find profile data", e);
-            throw new ProfileDataException("Cannot find profile data", e);
+        //NOSONAR
         } catch (IOException e) {
             logger.error("Cannot read profile data", e);
             throw new ProfileDataException("Cannot read profile data", e);
