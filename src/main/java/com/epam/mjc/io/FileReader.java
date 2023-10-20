@@ -12,7 +12,7 @@ public class FileReader {
     private static final Logger logger = LoggerFactory.getLogger(FileReader.class);
     private ProfileParser parser = new ProfileParser();
 
-    @java.lang.SuppressWarnings({"squid:S2139", "java:S2139"})
+    @java.lang.SuppressWarnings("java:S2139")
     public Profile getDataFromFile(File file) {
         try (BufferedReader in = new BufferedReader(new java.io.FileReader(file))) {
             parser.init();
