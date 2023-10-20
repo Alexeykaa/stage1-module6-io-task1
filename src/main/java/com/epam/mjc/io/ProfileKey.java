@@ -1,7 +1,7 @@
 package com.epam.mjc.io;
 
 public enum ProfileKey {
-    NAME("Name"), AGE("Age"), EMAIL("Email"), PHONE("Phone");
+    NONE(""), NAME("Name"), AGE("Age"), EMAIL("Email"), PHONE("Phone");
 
     private final String key;
 
@@ -14,7 +14,7 @@ public enum ProfileKey {
     }
 
     public static ProfileKey getValue(String key) {
-        ProfileKey result = null;
+        ProfileKey result = NONE;
         for (ProfileKey value : ProfileKey.values()) {
             if (value.getKey().equalsIgnoreCase(key)) {
                 result = value;

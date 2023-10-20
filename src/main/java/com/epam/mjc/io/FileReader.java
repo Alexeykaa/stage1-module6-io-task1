@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FileReader {
 
+    private static final Logger logger = LoggerFactory.getLogger(FileReader.class);
     private ProfileParser parser = new ProfileParser();
 
     public Profile getDataFromFile(File file) {
@@ -19,7 +22,8 @@ public class FileReader {
             }
             return parser.getProfile();
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read profile data", e);
+            logger.error("Cannot read profile data", e);
+            throw new ProfileDataException("Cannot read profile data", e);
         }
     }
 }

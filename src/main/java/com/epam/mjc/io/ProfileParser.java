@@ -1,6 +1,10 @@
 package com.epam.mjc.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ProfileParser {
+    private static final Logger logger = LoggerFactory.getLogger(ProfileParser.class);
 
     private static final String KEY_VALUE_DELIMITER = ":";
     private Profile profile;
@@ -21,7 +25,7 @@ public class ProfileParser {
             // found key-value pair
             parse(data[0].trim(), data[1].trim());
         } else {
-            System.err.println("Invalid profile format: " + s);
+            logger.error("Invalid profile data format: {}", s);
         }
     }
 
@@ -40,8 +44,11 @@ public class ProfileParser {
             case PHONE:
                 setPhone(value);
                 break;
+            case NONE:
+                logger.error("Cannot find profile key for {}:{}", key, value);
+                break;
             default:
-                System.err.println("Cannot find profile key: " + key);
+                logger.error("Unsupported key {} for data {}:{}", prop, key, value);
                 break;
         }
     }
@@ -51,8 +58,7 @@ public class ProfileParser {
             long phone = Long.parseLong(value);
             profile.setPhone(phone);
         } catch (NumberFormatException e) {
-            System.err.println("Invalid Phone format: " + value);
-            System.err.println(e);
+            logger.error("Invalid Phone format: " + value, e);
         }
     }
 
@@ -61,8 +67,7 @@ public class ProfileParser {
             int age = Integer.parseInt(value);
             profile.setAge(age);
         } catch (NumberFormatException e) {
-            System.err.println("Invalid Age format: " + value);
-            System.err.println(e);
+            logger.error("Invalid Age format: " + value, e);
         }
     }
 }
